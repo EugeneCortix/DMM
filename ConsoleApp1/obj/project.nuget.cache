@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "espcEhF5steS2u1emuO50QK17fkwMwkQqNxF4cvQ/HSrpF1ccyOrOwoZz1UuZolIDsRwolbSc7iUy4OfZbQjLg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\TANYA\\Documents\\Study\\ДММ\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\TANYA\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\TANYA\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\TANYA\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\TANYA\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.15\\microsoft.netcore.app.host.win-x64.6.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}
