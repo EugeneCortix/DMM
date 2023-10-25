@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization; ///////////////t+t+t+t///////////////////
+using System.Globalization; 
 class DMM
 {
     static void Main()
@@ -43,49 +43,27 @@ class DMM
         }
         else
         {
-            int frees = tval(q, M);
+            int frees = 0;
+            if(M - N > 0) frees = M - N; 
             Console.Clear();
             Console.WriteLine(frees);
             for(int i = 0; i < M; i++)
-                Console.WriteLine(Show(q[i,0], q[i,1], frees));
+                Console.WriteLine(Show(q, i, frees));
             Console.ReadLine();
         }
     }
 
-    static int tval(int[,] mat, int M)
-    {
-        int res = 0;
-        for(int i = 0; i < M; i++)
-            if (mat[i,1] != 0)
-                res = 1;
-        return res;
-    }
-    static string Show(int x, int t, int f)
+    static string Show(int[,] q, int i, int f)
     {
         string res = "";
-        /* if(x== 0)
-         {
-             if (t == 0) return "0";
-             res += Convert.ToString(t); // + "t";
-             return res;
-         }
-         else
-         {
-             res += Convert.ToString(x);
-             if (t == 0) return res;
-             if (t > 0) res += "+";
-             res += Convert.ToString(t); // + "t";
-             return res;
-         }*/
-        res += Convert.ToString(x);
-        if(f != 0)
-        res+= ' ' + Convert.ToString(t);
+        for (int j = 0; j <= f; j++)
+            res += Convert.ToString(q[i, j]) + ' ';
         return res;
     }
     static int[,] Solveone(int[,] B, int[] c, int M)
     {
         c[0] *= -1;
-    int[,] res = new int[M, 2];
+    int[,] res = new int[M, M];
         int cont = 0;
         for (int j = 0; j < M; j++)
             if (B[0, j] != 0) cont++;
@@ -147,13 +125,13 @@ class DMM
         }
         if (c[0] % d > 0)
             return null;
-        for(int i = 1; i < M+1; i++)
+      for(int i = 0; i < M; i++)
         {
-            res[i - 1,0] = B[i,0] *c[0]/d;
-            res[i - 1, 1] = 0;
+            res[i, 0] = B[i +1, 0] * c[0] / d;
             for (int j = 1; j < M; j++)
-                res[i - 1, 1] += B[i, j];
+                res[i, j] = B[i + 1, j];
         }
+      
         return res;
     }
     static int[,] Solvesyst(int[,] B, int[] c, int M, int N)
@@ -220,14 +198,17 @@ class DMM
         // diagonal shaping
         B = diagonal(B, N, M);
         if (B == null) return B;
-            
-            // a clif
-            int[,] answer = new int[M, 2];
-        for(int i = 0; i < M; i++)
-        {
-            for(int j = N; j < M; j++)
-                answer[i, 1] += B[i + N, j];
 
+        // a clif
+        int cols = 1;
+        if (M - N > 0) cols += M - N;
+            int[,] answer = new int[M, cols];
+        int anscount = 1;
+        for (int j = N; j < M; j++)
+        {
+            for (int i = 0; i < M; i++)
+                answer[i, anscount] += B[i + N, j];
+            anscount++;
         }
         for(int i = 0; i < M; i++)
         {
@@ -272,6 +253,8 @@ class DMM
         int ind = -1;
         for (int j = 0; j < N; j++)
             if (B[i, j] != 0) ind = j;
+        /// if no ind
+        if (ind == -1) return c;
         for (int j = 0; j < N; j++)
             if (Math.Abs(B[i, j]) > Math.Abs(B[i, ind]) && Math.Abs(B[i, j]) < Math.Abs(c[i]))
                 ind = j;
